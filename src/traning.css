@@ -1,0 +1,106 @@
+.bump-animation {
+	animation: show 0.2s ease-in;
+	animation-iteration-count: 1;	
+}
+
+@keyframes show {
+  0% {margin-top:-3em;}
+  71% {margin-top:0;}
+  100% {margin-top:0;}
+}
+
+#current-technique-container {
+  	overflow:hidden;
+  	height: 3em;
+  	font-size:2em;
+}
+
+@media screen and (max-width: 500px) {
+  #current-technique-container {
+  	height: 4em;
+}
+}
+
+@media screen and (max-width: 250px) {
+  #current-technique-container {
+  	height: 5em;
+}
+}
+
+@media screen and (max-width: 150px) {
+  #current-technique-container {
+  	font-size:1em;
+  	height: 7em;
+}
+}
+
+.p-inputgroup-addon {
+	padding: 1px;
+	border: 0;
+	/* border-top: 0;
+	border-left: 0;
+	border-bottom: 0;*/
+}
+
+.zebra-row {
+	padding: 0;
+}
+
+
+
+
+.p-inputgroup-addon:last-child {
+    border-right: 0;
+}
+
+.kiu-item-view>.p-inputgroup {
+	height: 1.4em;	
+}
+
+.menu {
+	position: relative;
+	top: -2.3em;
+	padding-left: 0.2em;
+}
+
+.zebra-row:nth-child(odd) .p-inputgroup-addon {
+   background-color: #fff;
+}
+
+/** green theme */
+
+#current-technique-container {
+  	background:#42c58a;	
+}
+
+
+#current-technique {
+	  color:#FFFFFF;
+}
+
+.p-progressbar .p-progressbar-value {
+	background-color: #028248;
+}
+/*
+.p-progressbar-determinate .p-progressbar-label {
+	color: #fff;
+}
+
+#finished-pane {
+	color: #fff;
+}
+ 
+.p-button.p-button-text:not(a):not(.p-disabled) {
+	color: #42c58a;
+}
+
+.p-button.p-button-text:not(a):not(.p-disabled):hover {
+	color: #028248;
+}
+
+.kiu-item-view .p-inputgroup-addon {
+	background-color: #fff;
+	border-width: 1px;
+}
+
+*/
