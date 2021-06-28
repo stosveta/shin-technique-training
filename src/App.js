@@ -6,9 +6,9 @@ import AppView from './AppView.js';
    
 function App() {
   return (
-    <>
-      <AppView />
-    </>
+
+  <AppView />
+
   );
 }
 
