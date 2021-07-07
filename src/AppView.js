@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
 
-
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 
@@ -27,13 +26,13 @@ const AppView = () => {
 
     const handleStartStop = () => {
         trainingView.handleStartStop(
-            () => settingsView.getSettings(),
+            () => SettingsView.getSettings(),
             () => setInProgress(trainingView && trainingView.state.inProgress)
         );
     }
 
     const handleShowHideSettings = () => {
-        return settingsView.toggleVisibility();
+        return SettingsView.toggleVisibility();
     }
     
     return <>
@@ -51,7 +50,7 @@ const AppView = () => {
 
             <SettingsView
                 ref={(element) => {settingsView = element}}
-                value = {settings}
+                // value = {settings}
             />
             
             <TrainingView

@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
 
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
@@ -7,73 +6,55 @@ import { Panel } from 'primereact/panel';
 
 import TECHNIQUES_MAP from "./Techniques.js";
 
-export default class SettingsView extends React.Component {
-	constructor(props) {
-		super(props);
+const SettingsView = ({ settings } ) => {	
+	const [isOpened, setIsOpened] = useState(false)
 
-		this.state = {
-			isOpened : false,
-			defaultValue: this.props.value ? this.props.value : SettingsView.DEFAULT_SETTINGS()
-		};
+	// All the data tree is located in child view elements and is retrieved from there
+	let delayElement = null;
+	let amountElement = null;
+	let kiusElement = null;
 
-		// All the data tree is located in child view elements and is retrieved from there
-		// this.delayElement is set in render
-		// this.amountElement is set in render
-		// this.kiusElement is set in render
+	/** @public */
+	// TODO Seems to work correctly but investigate, what if there are (theoretically) few settingWiew on a page.
+	SettingsView.toggleVisibility = () => {
+		setIsOpened(!isOpened)
 	}
 
-  render() { 
-  	let isOpened = this.state.isOpened;
-  	// let label = (isOpened ? "Hide" : "Show") +  " Settings";
+	SettingsView.getSettings = () => {
+		return {
+			kius: kiusElement.getValues(),
+			amount: amountElement.getValue(),
+			delay: delayElement.getValue()
+		}
+	}
+
+	// let label = (isOpened ? "Hide" : "Show") +  " Settings";
   	let displayStyle = {display: isOpened ? "block" : "none"};
-  	let value = this.state.defaultValue;
 
   	 return (
-  	 	<>	
 	  	 	<div style={displayStyle}>
 	  	 		<Panel header="General Settings">
 	  	 			<div className="p-formgroup-inline">
 			  			<TechniquesDelay 
-			  				ref={(element) => this.delayElement = element } 
-			  				value = {value.delay}
+			  				ref={(element) => delayElement = element } 
+			  				value = {settings.delay}
 			  			/>
 
 			  			<TechniquesAmount 
-			  				ref={(element) => this.amountElement = element }
-			  				value = {value.amount}
+			  				ref={(element) => amountElement = element }
+			  				value = {settings.amount}
 			  			/>
 			  		</div>
 	  			</Panel>
 	  			<Panel header="Choose Techniques to Practice">
 		  			<KiuListView
-		  				ref={(element) => this.kiusElement = element } 
-		  				value = {value.kius}
+		  				ref={(element) => kiusElement = element } 
+		  				value = {settings.kius}
 		  			/>
 	  			</Panel>
   			</div>
-	  	 </>
   	 );
-  }
-
-  /** @public */
-  toggleVisibility () {
-  	this.setState({
-  		isOpened: !this.state.isOpened
-  	})
-  }
-
-  getSettings() {
-  	let settings = {
-      kius: this.kiusElement.getValues(),
-      amount: this.amountElement.getValue(),
-      delay: this.delayElement.getValue()
-    };
-
-    return settings;
-  }
 }
-
-// TODO: Load saved settings
 
 SettingsView.DEFAULT_SETTINGS = function() {
 	let defaultKius = {
@@ -118,6 +99,11 @@ SettingsView.DEFAULT_SETTINGS = function() {
   	return settings;
 }
 
+// TODO: Load saved settings
+
+SettingsView.defaultProps = {
+	settings: SettingsView.DEFAULT_SETTINGS()
+}
 
 class KiuListView extends React.Component {
 	constructor(props) {
@@ -464,3 +450,5 @@ class TechniquesAmount extends React.Component {
 		return this.state.value;
 	}
 }
+
+export default SettingsView;
